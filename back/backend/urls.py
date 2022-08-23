@@ -18,7 +18,13 @@ from django.urls import path
 
 from django.conf.urls.static import static
 from django.conf import settings
+from knitted_back import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # login
+    path('token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # register
+    path('register/', views.RegisterView.as_view(), name='auth_register'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
