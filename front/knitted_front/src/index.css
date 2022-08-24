@@ -50,3 +50,22 @@ code {
   justify-content: center;
   
 }
+
+.myLogin {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(46, 157, 129);
+  padding: 5px;
+}
+
+.active-user {
+  display: flex;
+  align-items: center;
+}
+.active-user span {
+  margin-right: 5px;
+}
+
+.main-sec {
+  display: flex;
+}

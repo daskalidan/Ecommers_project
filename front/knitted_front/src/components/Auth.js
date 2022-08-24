@@ -7,7 +7,6 @@ const Authentication = () => {
   const dispatch = useDispatch();
 
   const auth = useSelector(authenticationSelector);
-  // const email = auth.email;
   const userName = auth.userName;
   const token = auth.token;
   const [username, setusername] = useState("");
@@ -15,20 +14,22 @@ const Authentication = () => {
 
   return (
     <div className="myLogin">
-      { token ?<>
-          <h3>loged in as: {userName}</h3>
-          <button onClick={() => dispatch(logout())}>Logout</button></>
-          : <> Login:{" "}
+      { token ?<div></div>
+          : <div> Login:{" "}
           <input type="text" value={username} placeholder="username" onChange={(e) => setusername(e.target.value)}></input>{" "}
           <input type="password" value={password} placeholder="password" onChange={(e) => setpassword(e.target.value)}></input>{" "}
           <button onClick={() => dispatch(doSigninAsync({ username: username, password: password }))}>Login</button>
           {' or '}
           <Link to='/register'>register</Link>
-          </>
+          </div>
           }
-      {/* {userName && <div>User name: {userName}</div>} */}
-      {/* {email && <div> Email: {email}</div>} */}
-      {/* {token && <div> token: {token}</div>} */}
+          { token ?<div className="active-user">
+          <span>loged in as: {userName}</span>
+          <button onClick={() => dispatch(logout())}>Logout</button></div>
+          : <div>
+            {userName}
+          </div>
+          }
     </div>
   );
 };

@@ -26,5 +26,7 @@ urlpatterns = [
     path('token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     # register
     path('register/', views.RegisterView.as_view(), name='auth_register'),
+    # products
+    path('allproducts/', views.all_products),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

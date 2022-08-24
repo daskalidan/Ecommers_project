@@ -26,6 +26,9 @@ class UserProfile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.userprofile.save()
 
+    def __str__(self):
+        return self.user
+
 
 class Category(models.Model):
     cat_name = models.CharField(

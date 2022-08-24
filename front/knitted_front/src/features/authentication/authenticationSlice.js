@@ -2,15 +2,14 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { signin,signup } from './authenticationAPI';
 import jwt_decode from "jwt-decode";
 
-// State - data (init)
+
 const initialState = {
     userName: "guest",
     email: "",
     token: "",
     logged: false
 };
-// async (1)
-// simple async method (component can call it...)
+
 export const doSigninAsync = createAsyncThunk(
     'authentication/signin',
     async (action) => {
@@ -38,8 +37,7 @@ export const authenticationSlice = createSlice({
                     state.email=""
           },
     },
-    //  async  (3)
-    //   happens when async done - callback
+
     extraReducers: (builder) => {
         builder
             .addCase(doSigninAsync.fulfilled, (state, action) => {
@@ -49,7 +47,6 @@ export const authenticationSlice = createSlice({
                     state.logged = true;
                     state.userName= jwt_decode(action.payload.access).username
                     state.email=jwt_decode(action.payload.access).email
-                    // console.log( state.email)
                 }
             })
             .addCase(doSignupAsync.fulfilled, (action) => {
