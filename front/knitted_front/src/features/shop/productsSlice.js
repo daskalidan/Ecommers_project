@@ -1,38 +1,51 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { get_all_productss } from './productsAPI';
+import { add_new_product, get_all_products } from './productsAPI';
 
 
 const initialState = {
-  products: [],
-  productsInCategory: [],
-  
+    products: [],
+    productsInCategory: [],
+
 };
 
 export const getAllProductsAsync = createAsyncThunk(
-  'products/get_all',
-  async () => {
-    const response = await get_all_productss();
-    return response.data;
-}
+    'products/get_all',
+    async () => {
+        const response = await get_all_products();
+        return response.data;
+    }
+);
+
+export const addNewProductAsync = createAsyncThunk(
+    'products/add_new',
+    async (action) => {
+        const response = await add_new_product(action);
+        return response.data;
+    }
 );
 
 export const productsSlice = createSlice({
-  name: 'products',
-  initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
+    name: 'products',
+    initialState,
+    reducers: {
+        increment: (state) => {
+            state.value += 1;
+        },
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getAllProductsAsync.fulfilled, (state, action) => {
-        console.log(action.payload)
-        state.products = action.payload;
-        // need to chang
-        state.productsInCategory = action.payload
-      });
-  },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getAllProductsAsync.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.products = action.payload;
+                // need to chang
+                state.productsInCategory = action.payload
+            })
+
+            .addCase(addNewProductAsync.fulfilled, (state, action) => {
+                console.log(action)
+                state.products = action.payload
+            })
+    },
 });
 
 export const { increment } = productsSlice.actions;

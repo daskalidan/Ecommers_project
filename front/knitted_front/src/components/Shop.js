@@ -20,7 +20,7 @@ const Shop = () => {
       shop
       <div className="shop">
         {pruductsAr.map((item) => (
-          <Card sx={{ maxWidth: 200 }} key={item.id}>
+          <Card sx={{ maxWidth: 200, margin: '5px', backgroundColor: 'rgb(184, 184, 184)'}} key={item.id}>
             <CardMedia
               component="img"
               height="200"

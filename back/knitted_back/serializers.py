@@ -8,7 +8,7 @@ from rest_framework.validators import UniqueValidator
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'description', 'category', 'name', 'price', 'get_thumbnail')
+        fields = ('id', 'description', 'category', 'name', 'price','image', 'get_thumbnail')
 
 
 class CategorySerializer(serializers.ModelSerializer):

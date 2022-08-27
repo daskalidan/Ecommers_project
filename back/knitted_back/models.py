@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.core.files import File
 from django.contrib.auth.models import User
@@ -40,14 +41,11 @@ class Category(models.Model):
 
 class Product(models.Model):
 
-    name = models.CharField(max_length=100, blank=False,
-                            null=False, default='unknown')
-    description = models.TextField(
-        max_length=1000, blank=False, null=False, default='unknown')
-    price = models.DecimalField(
-        max_digits=6, decimal_places=2, blank=False, null=False, default=99)
+    name = models.CharField(max_length=100, blank=False, null=False, default='unknown')
+    description = models.TextField(max_length=1000, blank=False, null=False, default='unknown')
+    price = models.DecimalField(max_digits=6, decimal_places=2, blank=False, null=False, default=99)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-    image = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    image = models.ImageField(upload_to='uploads/', default='uploads/640px-Several_packages_of_yarn.jpg')
     thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
 
     def __str__(self):

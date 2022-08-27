@@ -69,3 +69,19 @@ code {
 .main-sec {
   display: flex;
 }
+
+.add-product {
+  background-color: rgb(66, 64, 130);
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  min-width: 200px;
+  align-items: center;
+}
+
+.shop {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}

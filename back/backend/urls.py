@@ -28,5 +28,6 @@ urlpatterns = [
     path('register/', views.RegisterView.as_view(), name='auth_register'),
     # products
     path('allproducts/', views.all_products),
+    path('createnewproduct/', views.Create_new_product.as_view()),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
