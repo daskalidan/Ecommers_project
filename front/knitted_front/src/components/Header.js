@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { cartCalc, cartItemsCountSelector, cartSelector } from '../features/cart/cartSlice'
 
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Button from '@mui/material/Button';
 
 const Header = () => {
+    const dispatch = useDispatch();
 
+    
+    const myCartCount = useSelector(cartItemsCountSelector)
+    const myCart = useSelector(cartSelector)
+    
+
+    useEffect(() => {
+        dispatch(cartCalc())
+    }, [myCart, dispatch])
 
     return (
         <div className='header'>
@@ -14,7 +27,9 @@ const Header = () => {
                 </span>
             </div>
             <div className='cart-counter'>
-                <p>cart</p>
+                <Button color='primary' variant="contained" endIcon={<ShoppingCartIcon />}>
+                    cart ({ myCartCount })
+                </Button>
 
             </div>
 

@@ -2,6 +2,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { productsInCategorySelector } from '../features/shop/productsSlice';
+import { addToCart } from '../features/cart/cartSlice';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -36,7 +37,7 @@ const Shop = () => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Add to cart</Button>
+              <Button size="small" onClick={() => dispatch(addToCart(item))}>Add to cart</Button>
               <span>${item.price}</span>
             </CardActions>
           </Card>

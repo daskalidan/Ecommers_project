@@ -40,6 +40,10 @@ code {
   
 }
 
+.cart-counter {
+  align-self: end;
+}
+
 .footer {
   display: flex;
   align-items: center;

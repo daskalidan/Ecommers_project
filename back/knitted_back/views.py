@@ -52,8 +52,8 @@ class Create_new_product(APIView):
         print(request.data)
         if request.user.is_staff == True:
             new_product_serializer = ProductSerializer(data=request.data)
-            if new_product_serializer.is_valid():  # the serializer check our data
-                new_product_serializer.save()  # save to DB (path,str) and save the actual file to directory
+            if new_product_serializer.is_valid():  
+                new_product_serializer.save()
                 products = Product.objects.all()
                 serializer = ProductSerializer(products, many=True)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
