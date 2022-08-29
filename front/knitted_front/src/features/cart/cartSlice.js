@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
+import {  createSlice } from '@reduxjs/toolkit';
+// createAsyncThunk,
 
 
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
     cartTotalPrice: 0,
 };
 
+// need to add submit cart to server!!!!!!!!!!!
 // export const dogetbooksAsync = createAsyncThunk(
 //     'main_shop/getbooks',
 //     async () => {

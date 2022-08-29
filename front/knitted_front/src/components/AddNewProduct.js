@@ -8,8 +8,8 @@ const AddNewProduct = () => {
     const dispatch = useDispatch();
 
 const [productName, setproductName] = useState('')
-const [category, setcategory] = useState(0)
-const [price, setprice] = useState(0)
+const [category, setcategory] = useState('')
+const [price, setprice] = useState('')
 const [description, setdescription] = useState('')
 const [imag, setimag] = useState(null)
 

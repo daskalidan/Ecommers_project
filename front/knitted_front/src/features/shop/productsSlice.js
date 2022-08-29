@@ -69,7 +69,9 @@ export const productsSlice = createSlice({
 
             .addCase(addNewProductAsync.fulfilled, (state, action) => {
                 console.log(action)
-                state.products = action.payload
+                state.products = action.payload;
+                state.category = 'all'
+                state.productsInCategory = action.payload
             })
 
             .addCase(addNewCategoryAsync.fulfilled, (state, action) => {

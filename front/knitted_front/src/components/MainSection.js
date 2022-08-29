@@ -4,23 +4,23 @@ import AddNewCategory from './AddNewCategory'
 import AddNewProduct from './AddNewProduct'
 import Categories from './Categories'
 
-
+import Grid from '@mui/material/Unstable_Grid2';
 
 const MainSection = () => {
 
   return (
-    <div className='main-sec'>
-        <div className='left'>
-            left
+      <Grid container spacing={2}>
+        <Grid xs={3}>
+        left
             <AddNewCategory></AddNewCategory>
             <AddNewProduct></AddNewProduct>
             <Categories></Categories>
-        </div>
-        <div className='right'>
-            right
+        </Grid>
+        <Grid xs={9}>
+        right
             <Outlet></Outlet>
-        </div>
-    </div>
+        </Grid>
+      </Grid>
   )
 }
 
