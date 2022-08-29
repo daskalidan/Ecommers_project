@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authenticationReducer from '../src/features/authentication/authenticationSlice'
-import productsReducer, { getAllProductsAsync } from '../src/features/shop/productsSlice'
+import productsReducer, { getAllCategoriesAsync, getAllProductsAsync } from '../src/features/shop/productsSlice'
 import cartReducer from '../src/features/cart/cartSlice'
 
 export const store = configureStore({
@@ -12,3 +12,4 @@ export const store = configureStore({
 });
 
 store.dispatch(getAllProductsAsync())
+store.dispatch(getAllCategoriesAsync())

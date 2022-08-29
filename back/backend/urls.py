@@ -29,5 +29,8 @@ urlpatterns = [
     # products
     path('allproducts/', views.all_products),
     path('createnewproduct/', views.Create_new_product.as_view()),
+    # categories
+    path('allcategories/', views.all_categories),
+    path('createnewcategory/', views.create_new_category),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,6 +9,12 @@ export function get_all_products() {
     );
 }
 
+export function get_all_categories() {
+    return new Promise((resolve) =>
+        axios.get(`${URL}allcategories/`).then((res) => resolve({ data: res.data }))
+    );
+}
+
 export function add_new_product(action) {
     console.log(action)
     const data = {
@@ -23,6 +29,21 @@ export function add_new_product(action) {
         axios.post(`${URL}createnewproduct/`,
          data,
          { headers: { 'Authorization': `Bearer ${action.token}`, 'Content-Type': 'multipart/form-data'} },
+         ).then((res) => resolve({ data: res.data }))
+    );
+
+}
+
+export function add_new_category(action) {
+    console.log(action)
+    const data = {
+        'cat_name': action.category
+    }
+
+    return new Promise((resolve) =>
+        axios.post(`${URL}createnewcategory/`,
+         data,
+         { headers: { 'Authorization': `Bearer ${action.token}` } },
          ).then((res) => resolve({ data: res.data }))
     );
 

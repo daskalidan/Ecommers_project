@@ -8,8 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 
-from .models import Product
-from .serializers import MyTokenObtainPairSerializer, ProductSerializer, RegisterSerializer
+from .models import Category, Product
+from .serializers import CategorySerializer, MyTokenObtainPairSerializer, ProductSerializer, RegisterSerializer
 
 # Create your views here.
 
@@ -25,23 +25,29 @@ def all_products(request):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def all_categories(request):
+    categories = Category.objects.all()
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data)    
 
-# @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
-# def create_new_product(request):
-#     print(request.user)
-#     if request.user.is_staff == True:
-#         new_product_serializer = ProductSerializer(data=request.data)
-#         print(request.data)
-#         if new_product_serializer.is_valid():
-#             new_product_serializer.save()
-#             products = Product.objects.all()
-#             serializer = ProductSerializer(products, many=True)
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(new_product_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#     else:
-#         return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_new_category(request):
+    print(request.user)
+    if request.user.is_staff == True:
+        new_category_serializer = CategorySerializer(data=request.data)
+        print(request.data)
+        if new_category_serializer.is_valid():
+            new_category_serializer.save()
+            categories = Category.objects.all()
+            serializer = CategorySerializer(categories, many=True)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(new_category_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
 class Create_new_product(APIView):
@@ -49,6 +55,7 @@ class Create_new_product(APIView):
     parser_class = (MultiPartParser, FormParser)
 
     def post(self, request, *args, **kwargs):
+        print(request.user)
         print(request.data)
         if request.user.is_staff == True:
             new_product_serializer = ProductSerializer(data=request.data)
