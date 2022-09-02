@@ -6,11 +6,14 @@ import App from './App';
 import './index.css';
 import { BrowserRouter } from "react-router-dom";
 
+import CssBaseline from '@mui/material/CssBaseline';
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
+    <CssBaseline />
     <BrowserRouter>
     <Provider store={store}>
       <App />

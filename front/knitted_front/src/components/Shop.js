@@ -10,6 +10,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
 
 
 const Shop = () => {
@@ -17,11 +18,11 @@ const Shop = () => {
   const pruductsAr = useSelector(productsInCategorySelector);
 
   return (
-    <div>
+    <Box sx={{ textAlign: 'center'}}>
       shop
-      <div className="shop">
+      <Box sx={{ display: 'flex', justifyContent: 'space-evenly', flexWrap: 'wrap' }}>
         {pruductsAr.map((item) => (
-          <Card sx={{ maxWidth: 200, margin: '5px', backgroundColor: 'rgb(184, 184, 184)'}} key={item.id}>
+          <Card sx={{ maxWidth: 200, margin: '5px', textAlign: 'start' }} key={item.id}>
             <CardMedia
               component="img"
               height="200"
@@ -42,8 +43,8 @@ const Shop = () => {
             </CardActions>
           </Card>
         ))}
-      </div>
-    </div>
+      </Box>
+      </Box>
   )
 }
 

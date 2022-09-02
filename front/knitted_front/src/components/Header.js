@@ -5,6 +5,8 @@ import { cartCalc, cartItemsCountSelector, cartSelector } from '../features/cart
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { Grid } from '@mui/material';
+
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -19,6 +21,7 @@ const Header = () => {
     }, [myCart, dispatch])
 
     return (
+        <Grid item xs={12}>
         <div className='header'>
             <div className='logo'>
                 <Link to='/' ><img src='.\icons8-yarn-100.png' alt='logo' /></Link>
@@ -36,7 +39,8 @@ const Header = () => {
 
             </div>
 
-        </div>
+        </div> 
+        </Grid>
     )
 }
 

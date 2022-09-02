@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { doSigninAsync, logout, authenticationSelector } from "../features/authentication/authenticationSlice";
 import { Link } from 'react-router-dom'
+import { Grid } from "@mui/material";
 
 const Authentication = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Authentication = () => {
   const [password, setpassword] = useState("");
 
   return (
+    <Grid item xs={12}>
     <div className="myLogin">
       { token ?<div></div>
           : <div> Login:{" "}
@@ -31,6 +33,7 @@ const Authentication = () => {
           </div>
           }
     </div>
+    </Grid>
   );
 };
 

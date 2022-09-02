@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Box, Button, ButtonGroup } from '@mui/material';
 
 
 const Cart = () => {
@@ -18,12 +19,13 @@ const Cart = () => {
 
 
   return (
-      <TableContainer component={Paper}>
+    <Box sx= {{ padding: '5%', textAlign: 'center' }}>
+      <TableContainer component={Paper} >
         <h2>My cart</h2>
         {myCart.length === 0 ?
           (<p>cart is empty</p>) :
           (
-            <Table sx={{ minWidth: 650 }} aria-label="simple table" >
+            <Table sx={{ minWidth: 550 }} aria-label="simple table" >
               <TableHead>
                 <TableRow>
                   <TableCell>product</TableCell>
@@ -32,18 +34,22 @@ const Cart = () => {
                   <TableCell align="right">total price</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+              <TableBody >
                 {myCart.map((item) => (
                   <TableRow key={item.id}>
-                    <TableCell component="th" scope="row">
+                    <TableCell component="th" scope="row" >
+                      <Box sx={{ alignItems: 'center', display: 'flex' }}>
                       <img alt='product img' src={item.get_thumbnail} width="50" height="50" />
-                      {item.name}
+                      <p>{item.name}</p>
+                      </Box>
                     </TableCell>
                     <TableCell align="right">${item.price}</TableCell>
                     <TableCell align="right">
-                      <button onClick={() => dispatch(removeFromCart(item))}>-</button>
-                      {item.quantity}
-                      <button onClick={() => dispatch(addToCart(item))}>+</button>
+                      <ButtonGroup variant='contained' size="small">
+                      <Button onClick={() => dispatch(removeFromCart(item))}>-</Button>
+                      <Button>{item.quantity}</Button>
+                      <Button onClick={() => dispatch(addToCart(item))}>+</Button>
+                      </ButtonGroup>
                     </TableCell>
                     <TableCell align="right">${item.price * item.quantity}</TableCell>
                   </TableRow>
@@ -70,6 +76,7 @@ const Cart = () => {
             </Table>)
         }
       </TableContainer>
+      </Box>
   )
 }
 

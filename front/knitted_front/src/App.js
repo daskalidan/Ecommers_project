@@ -8,9 +8,11 @@ import MainSection from './components/MainSection';
 import Register from './components/Register';
 import Shop from './components/Shop';
 
+import { Box } from '@mui/material';
+
 function App() {
   return (
-    <div className="App">
+      <Box sx={{ backgroundColor: '#8b8b8b' }}>
       <Header />
       <Authentication />
       <Routes>
@@ -21,7 +23,7 @@ function App() {
         </Route>
       </Routes>
       <Footer />
-    </div>
+      </Box>
   );
 }
 
