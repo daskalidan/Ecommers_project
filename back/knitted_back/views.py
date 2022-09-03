@@ -69,3 +69,16 @@ class Create_new_product(APIView):
                 return Response(new_product_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_product(request):
+    try:
+        product = Product.objects.get(pk=request.data['id'])
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    product.delete()
+    products = Product.objects.all()
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)

@@ -16,32 +16,6 @@ code {
     monospace;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #212529;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  
-}
-
-.header .logo {
-  display: flex;
-  align-items: center;
-  
-}
-
-.header .logo span {
-  padding-left: 10px;
-  
-}
-
-.cart-counter {
-  align-self: end;
-}
-
 .myLogin {
   display: flex;
   justify-content: space-between;

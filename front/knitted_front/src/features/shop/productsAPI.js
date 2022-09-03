@@ -48,3 +48,14 @@ export function add_new_category(action) {
     );
 
 }
+
+export function delete_product(action) {
+    return new Promise((resolve) =>
+        axios.delete(`${URL}deleteproduct/`,
+            {
+                headers: { 'Authorization': `Bearer ${action.token}` },
+                data: action.item
+            }
+        ).then((res) => resolve({ data: res.data }))
+    );
+}

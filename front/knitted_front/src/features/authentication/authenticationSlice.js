@@ -7,7 +7,7 @@ const initialState = {
     userName: "guest",
     email: "",
     token: "",
-    logged: false
+    staff: false
 };
 
 export const doSigninAsync = createAsyncThunk(
@@ -32,7 +32,7 @@ export const authenticationSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.token = ""
-                    state.logged = false;
+                    state.staff = false;
                     state.userName= "guest"
                     state.email=""
           },
@@ -44,7 +44,7 @@ export const authenticationSlice = createSlice({
                 console.log(jwt_decode(action.payload.access))
                 if (action.payload.access) {
                     state.token = action.payload.access
-                    state.logged = true;
+                    state.staff = jwt_decode(action.payload.access).is_staff;
                     state.userName= jwt_decode(action.payload.access).username
                     state.email=jwt_decode(action.payload.access).email
                 }
@@ -61,7 +61,7 @@ export const { logout } = authenticationSlice.actions;
 
 // export any part of the state
 export const authenticationSelector = (state) => state.authentication;
-export const selectLogged = (state) => state.authentication.logged;
+export const selectStaff = (state) => state.authentication.staff;
 export const selectEmail = (state) => state.authentication.email;
 export const selectUserName = (state) => state.authentication.userName;
 export const selectToken = (state) => state.authentication.token;

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { add_new_product, get_all_products, get_all_categories, add_new_category } from './productsAPI';
+import { add_new_product, get_all_products, get_all_categories, add_new_category, delete_product } from './productsAPI';
 
 
 const initialState = {
@@ -42,6 +42,14 @@ export const addNewCategoryAsync = createAsyncThunk(
     }
 );
 
+export const deleteProductAsync = createAsyncThunk(
+    'products/deleteproduct',
+    async (action) => {
+        const response = await delete_product(action);
+        return response.data;
+    }
+);
+
 export const productsSlice = createSlice({
     name: 'products',
     initialState,
@@ -77,6 +85,15 @@ export const productsSlice = createSlice({
             .addCase(addNewCategoryAsync.fulfilled, (state, action) => {
                 console.log(action)
                 state.allCategories = action.payload
+            })
+
+            .addCase(deleteProductAsync.fulfilled, (state, action) => {
+                console.log(action)
+                if (action.payload) {
+                    state.products = action.payload
+                    state.category = 'all'
+                    state.productsInCategory = action.payload
+                }
             })
 
 

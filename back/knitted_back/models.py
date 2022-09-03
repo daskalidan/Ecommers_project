@@ -28,7 +28,7 @@ class UserProfile(models.Model):
         instance.userprofile.save()
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Category(models.Model):

@@ -29,6 +29,7 @@ urlpatterns = [
     # products
     path('allproducts/', views.all_products),
     path('createnewproduct/', views.Create_new_product.as_view()),
+    path('deleteproduct/', views.delete_product),
     # categories
     path('allcategories/', views.all_categories),
     path('createnewcategory/', views.create_new_category),
