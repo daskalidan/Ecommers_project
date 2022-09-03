@@ -78,7 +78,10 @@ def delete_product(request):
     except Product.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    product.delete()
-    products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+    if request.user.is_staff == True:
+        product.delete()
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)    
