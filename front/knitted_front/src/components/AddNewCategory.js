@@ -1,7 +1,7 @@
 import { Button, Stack } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectToken } from '../features/authentication/authenticationSlice';
+import { selectStaff, selectToken } from '../features/authentication/authenticationSlice';
 import { addNewCategoryAsync } from '../features/shop/productsSlice';
 
 
@@ -10,9 +10,11 @@ const AddNewCategory = () => {
 
     const [newCat, setnewCat] = useState('')
     const token = useSelector(selectToken);
+    const staff = useSelector(selectStaff)
 
     return (
-        <Stack spacing={2} sx={{ backgroundColor: 'rgb(66, 64, 130)', textAlign: 'center', padding: '10%' }}>
+        <>
+        { staff && <Stack spacing={1} sx={{ backgroundColor: 'rgb(66, 64, 130)', textAlign: 'center', padding: '10%' }}>
             <h3>add new category</h3>
             <input type='text' value={newCat} placeholder='category name' onChange={(e) => setnewCat(e.target.value)}></input>
 
@@ -22,7 +24,8 @@ const AddNewCategory = () => {
                     'token': token
                 }
             ))}>add category</Button>
-        </Stack>
+        </Stack>}
+        </>
     )
 }
 

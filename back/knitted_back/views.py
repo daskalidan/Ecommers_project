@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 
+from django.contrib.auth import logout
 from .models import Category, Product
 from .serializers import CategorySerializer, MyTokenObtainPairSerializer, ProductSerializer, RegisterSerializer
 
@@ -17,7 +18,14 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 class RegisterView(generics.CreateAPIView):
-    serializer_class = RegisterSerializer      
+    serializer_class = RegisterSerializer    
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def log_out(request):
+    logout(request)
+    return Response(status=status.HTTP_200_OK)
+
 
 @api_view(['GET'])
 def all_products(request):

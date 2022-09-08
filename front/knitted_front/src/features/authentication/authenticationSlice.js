@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { signin,signup } from './authenticationAPI';
+import { log_out, signin, signup } from './authenticationAPI';
 import jwt_decode from "jwt-decode";
 
 
@@ -26,16 +26,24 @@ export const doSignupAsync = createAsyncThunk(
     }
 );
 
+export const doSignoutAsync = createAsyncThunk(
+    'authentication/signout',
+    async (action) => {
+        const response = await log_out(action);
+        return response.data;
+    }
+);
+
 export const authenticationSlice = createSlice({
     name: 'authentication',
     initialState,
     reducers: {
-        logout: (state) => {
-            state.token = ""
-                    state.staff = false;
-                    state.userName= "guest"
-                    state.email=""
-          },
+        // logout: (state) => {
+        //     state.token = ""
+        //     state.staff = false;
+        //     state.userName = "guest"
+        //     state.email = ""
+        // },
     },
 
     extraReducers: (builder) => {
@@ -45,19 +53,26 @@ export const authenticationSlice = createSlice({
                 if (action.payload.access) {
                     state.token = action.payload.access
                     state.staff = jwt_decode(action.payload.access).is_staff;
-                    state.userName= jwt_decode(action.payload.access).username
-                    state.email=jwt_decode(action.payload.access).email
+                    state.userName = jwt_decode(action.payload.access).username
+                    state.email = jwt_decode(action.payload.access).email
                 }
             })
             .addCase(doSignupAsync.fulfilled, (action) => {
                 console.log(action)
-                
+
+            })
+            .addCase(doSignoutAsync.fulfilled, (state, action) => {
+                console.log(action)
+                state.token = ""
+                state.staff = false;
+                state.userName = "guest"
+                state.email = ""
             });
     },
 });
 
 // export sync method
-export const { logout } = authenticationSlice.actions;
+// export const { logout } = authenticationSlice.actions;
 
 // export any part of the state
 export const authenticationSelector = (state) => state.authentication;

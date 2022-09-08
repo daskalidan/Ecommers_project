@@ -14,3 +14,13 @@ export function signup(action) {
         .then((res) => resolve({ data: res.data }))
     );
 }
+
+export function log_out(action) {
+    console.log(action)
+    return new Promise((resolve) =>
+        axios.get(`${URL}logout/`,
+         { headers: { 'Authorization': `Bearer ${action.token}` } },
+         ).then((res) => resolve({ data: res.data }))
+    );
+
+}

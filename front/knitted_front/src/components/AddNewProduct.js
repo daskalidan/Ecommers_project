@@ -1,7 +1,7 @@
 import { Stack, Button } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectToken } from '../features/authentication/authenticationSlice';
+import { selectStaff, selectToken } from '../features/authentication/authenticationSlice';
 import { addNewProductAsync } from '../features/shop/productsSlice';
 
 
@@ -15,9 +15,11 @@ const AddNewProduct = () => {
   const [imag, setimag] = useState(null)
 
   const token = useSelector(selectToken);
+  const staff = useSelector(selectStaff)
 
   return (
-    <Stack spacing={2} sx={{ backgroundColor: 'rgb(66, 64, 130)', textAlign: 'center', padding: '10%' }}>
+    <>
+    {staff && <Stack spacing={1} sx={{ backgroundColor: 'rgb(66, 64, 130)', textAlign: 'center', padding: '10%' }}>
       <h3>Add New Product</h3>
       <input type='text' value={productName} placeholder='product name' onChange={(e) => setproductName(e.target.value)}></input>{' '}
       <input type='number' value={category} placeholder='category' onChange={(e) => setcategory(e.target.value)}></input>{' '}
@@ -35,7 +37,8 @@ const AddNewProduct = () => {
           'token': token
         }))
       }>add product</Button>
-    </Stack>
+    </Stack>}
+    </>
   )
 }
 

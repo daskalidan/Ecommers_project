@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, cartSelector, cartTotalPriceSelector, removeFromCart } from '../features/cart/cartSlice'
+import { addToCart, cartSelector, cartTotalPriceSelector, clearCart, removeFromCart } from '../features/cart/cartSlice'
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -69,8 +69,8 @@ const Cart = () => {
                   <TableCell align="right">${myTotalPrice + 20}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell colSpan={2}><button>clear cart</button></TableCell>
-                  <TableCell align="right"><button>checkout</button></TableCell>
+                  <TableCell colSpan={2}><Button variant='contained' onClick={() => dispatch(clearCart())}>clear cart</Button></TableCell>
+                  <TableCell align="right"><Button variant='contained'>checkout</Button></TableCell>
                 </TableRow>
               </TableBody>
             </Table>)

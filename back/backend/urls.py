@@ -22,8 +22,9 @@ from knitted_back import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # login
+    # login/logout
     path('token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('logout/', views.log_out),
     # register
     path('register/', views.RegisterView.as_view(), name='auth_register'),
     # products
