@@ -1,4 +1,4 @@
-import { Button, Stack } from '@mui/material';
+import { Box, Button, Paper, Stack } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStaff, selectToken } from '../features/authentication/authenticationSlice';
@@ -13,8 +13,8 @@ const AddNewCategory = () => {
     const staff = useSelector(selectStaff)
 
     return (
-        <>
-        { staff && <Stack spacing={1} sx={{ backgroundColor: 'rgb(66, 64, 130)', textAlign: 'center', padding: '10%' }}>
+        <Box sx={{ padding: '1px' }}>
+        { staff && <Paper sx={{ backgroundColor: 'rgb(66, 64, 130)', textAlign: 'center', padding: '10%' }}><Stack spacing={1}>
             <h3>add new category</h3>
             <input type='text' value={newCat} placeholder='category name' onChange={(e) => setnewCat(e.target.value)}></input>
 
@@ -24,8 +24,8 @@ const AddNewCategory = () => {
                     'token': token
                 }
             ))}>add category</Button>
-        </Stack>}
-        </>
+        </Stack></Paper>}
+        </Box>
     )
 }
 

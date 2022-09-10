@@ -10,14 +10,12 @@ const MainSection = () => {
 
   return (
       <Grid container >
-        <Grid item xs={12} sm={3}>
-        left
+        <Grid item xs={12} sm={3} sx={{ padding: '5px' }}>
             <AddNewCategory></AddNewCategory>
             <AddNewProduct></AddNewProduct>
             <Categories></Categories>
         </Grid>
         <Grid item xs={12} sm={9} sx={{ padding: '10px' }}>
-        right
             <Outlet></Outlet>
         </Grid>
       </Grid>

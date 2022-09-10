@@ -12,7 +12,7 @@ const Categories = () => {
   const active_cat = useSelector(categorySelector);
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', padding: '1px' }}>
       <Stack spacing={1} sx={{ textAlign: 'center' }}>
         <Paper>
         <h3>categories</h3><hr />

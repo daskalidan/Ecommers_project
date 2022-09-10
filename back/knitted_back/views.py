@@ -1,3 +1,4 @@
+from decimal import Decimal
 from rest_framework.response import Response
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes
@@ -9,7 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from django.contrib.auth import logout
-from .models import Category, Product
+from .models import Category, Order, OrderItem, Product
 from .serializers import CategorySerializer, MyTokenObtainPairSerializer, ProductSerializer, RegisterSerializer
 
 # Create your views here.
@@ -93,3 +94,17 @@ def delete_product(request):
         return Response(serializer.data)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)    
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def place_an_order(request):
+    client_order = request.data
+    print(Decimal(client_order['total_price']).quantize(Decimal('0.01')))
+    new_order = Order.objects.create(user=request.user,total_payment=Decimal(client_order['total_price']).quantize(Decimal('0.01')))
+
+    for item in client_order['items']:
+        product = Product.objects.get(id=item['id'])
+        OrderItem.objects.create(order=new_order,item=product,quantity=item['quantity'])
+
+    return Response(status=status.HTTP_201_CREATED)

@@ -34,5 +34,7 @@ urlpatterns = [
     # categories
     path('allcategories/', views.all_categories),
     path('createnewcategory/', views.create_new_category),
+    # orders
+    path('placeneworder/', views.place_an_order)
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

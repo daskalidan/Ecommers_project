@@ -1,4 +1,4 @@
-import { Stack, Button } from '@mui/material';
+import { Stack, Button, Paper, Box } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectStaff, selectToken } from '../features/authentication/authenticationSlice';
@@ -18,8 +18,8 @@ const AddNewProduct = () => {
   const staff = useSelector(selectStaff)
 
   return (
-    <>
-    {staff && <Stack spacing={1} sx={{ backgroundColor: 'rgb(66, 64, 130)', textAlign: 'center', padding: '10%' }}>
+    <Box sx={{ padding: '1px' }}>
+    {staff && <Paper sx={{ backgroundColor: 'rgb(66, 64, 130)', textAlign: 'center', padding: '10%' }}><Stack spacing={1} >
       <h3>Add New Product</h3>
       <input type='text' value={productName} placeholder='product name' onChange={(e) => setproductName(e.target.value)}></input>{' '}
       <input type='number' value={category} placeholder='category' onChange={(e) => setcategory(e.target.value)}></input>{' '}
@@ -37,8 +37,8 @@ const AddNewProduct = () => {
           'token': token
         }))
       }>add product</Button>
-    </Stack>}
-    </>
+    </Stack></Paper>}
+    </Box>
   )
 }
 

@@ -1,5 +1,5 @@
-import {  createSlice } from '@reduxjs/toolkit';
-// createAsyncThunk,
+import {  createSlice,createAsyncThunk } from '@reduxjs/toolkit';
+import { place_an_order } from './cartAPI';
 
 
 const initialState = {
@@ -8,14 +8,13 @@ const initialState = {
     cartTotalPrice: 0,
 };
 
-// need to add submit cart to server!!!!!!!!!!!
-// export const dogetbooksAsync = createAsyncThunk(
-//     'main_shop/getbooks',
-//     async () => {
-//         const response = await get_all_books();
-//         return response.data;
-//     }
-// );
+export const placeAnOrderAsync = createAsyncThunk(
+    'cart/placeanorder',
+    async (data) => {
+        const response = await place_an_order(data);
+        return response.data;
+    }
+);
 
 export const cartSlice = createSlice({
     name: 'cart',
@@ -78,18 +77,15 @@ export const cartSlice = createSlice({
         },
     },
 
-    // extraReducers: (builder) => {
-    //     builder
-    //         .addCase(dogetbooksAsync.fulfilled, (state, action) => {
-    //             console.log(action.payload)
-    //             if (action.payload) {
-    //                 state.books = action.payload
-    //                 state.category = 'all'
-    //                 state.booksInCategory = state.books
-    //             }
-    //         })
+    extraReducers: (builder) => {
+        builder
+            .addCase(placeAnOrderAsync.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.theCart = []
+                // toast
+            })
 
-    // },
+    },
 });
 
 

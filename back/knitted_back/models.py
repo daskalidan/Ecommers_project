@@ -77,3 +77,15 @@ class Product(models.Model):
 
         thumbnail = File(thumb_io, name=image.name)
         return thumbnail
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    created_time = models.DateTimeField(auto_now_add=True)
+    total_payment = models.DecimalField(decimal_places=2, max_digits=10)
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    item = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    quantity = models.PositiveIntegerField(blank=False, null=False, default=1)   

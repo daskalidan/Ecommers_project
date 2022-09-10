@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, cartSelector, cartTotalPriceSelector, clearCart, removeFromCart } from '../features/cart/cartSlice'
+import { addToCart, cartSelector, cartTotalPriceSelector, clearCart, placeAnOrderAsync, removeFromCart } from '../features/cart/cartSlice'
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,12 +10,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Button, ButtonGroup } from '@mui/material';
+import { authenticationSelector } from '../features/authentication/authenticationSlice';
 
 
 const Cart = () => {
   const myCart = useSelector(cartSelector)
   const dispatch = useDispatch();
   const myTotalPrice = useSelector(cartTotalPriceSelector)
+  
+  const auth = useSelector(authenticationSelector);
+  const token = auth.token;
 
 
   return (
@@ -70,7 +74,7 @@ const Cart = () => {
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={2}><Button variant='contained' onClick={() => dispatch(clearCart())}>clear cart</Button></TableCell>
-                  <TableCell align="right"><Button variant='contained'>checkout</Button></TableCell>
+                  <TableCell align="right"><Button variant='contained' onClick={() => dispatch(placeAnOrderAsync({token,myCart,myTotalPrice}))}>checkout</Button></TableCell>
                 </TableRow>
               </TableBody>
             </Table>)
