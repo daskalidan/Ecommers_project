@@ -1,9 +1,9 @@
 
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProductAsync, productsInCategorySelector } from '../features/shop/productsSlice';
+import { productsInCategorySelector } from '../features/shop/productsSlice';
 import { addToCart } from '../features/cart/cartSlice';
-import { selectStaff, selectToken } from '../features/authentication/authenticationSlice';
+import { selectStaff } from '../features/authentication/authenticationSlice';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -12,6 +12,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box, Stack } from '@mui/material';
+import DeleteProduct from './DeleteProduct';
 
 
 
@@ -20,8 +21,7 @@ const Shop = () => {
   const dispatch = useDispatch();
   const pruductsAr = useSelector(productsInCategorySelector);
 
-const staff = useSelector(selectStaff)
-const token = useSelector(selectToken)
+  const staff = useSelector(selectStaff)
 
   return (
     <Box sx={{ textAlign: 'center'}}>
@@ -48,7 +48,7 @@ const token = useSelector(selectToken)
             <CardActions>
               <Stack spacing={1}>
               {staff && <Button variant='contained' color="warning" >Edit (todo)</Button>}
-              {staff && <Button variant='contained' color="error" onClick={() => dispatch(deleteProductAsync({'item': item, 'token': token}))}>Delete</Button>}
+              {staff && <DeleteProduct item={ item }/>}
               <Box component='span'>
               <Button size="small" onClick={() => dispatch(addToCart(item))}>Add to cart</Button>
               <span>${item.price}</span>

@@ -100,7 +100,6 @@ def delete_product(request):
 @permission_classes([IsAuthenticated])
 def place_an_order(request):
     client_order = request.data
-    print(Decimal(client_order['total_price']).quantize(Decimal('0.01')))
     new_order = Order.objects.create(user=request.user,total_payment=Decimal(client_order['total_price']).quantize(Decimal('0.01')))
 
     for item in client_order['items']:

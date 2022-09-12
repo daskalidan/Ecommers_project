@@ -2,6 +2,7 @@ import { Box, Button, Card } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { doSignupAsync } from '../features/authentication/authenticationSlice'
+import { Link } from 'react-router-dom';
 
 
 const Register = () => {
@@ -21,6 +22,8 @@ const Register = () => {
       <input type='password' value={password} placeholder='password' onChange={(e) => setpassword(e.target.value)}></input>{' '}
       <span><label>staff:</label><input type='checkbox' value={staff} onChange={(e) => setstaff(e.target.value)}></input></span>
       <Button variant='contained' onClick={() => dispatch(doSignupAsync({ 'username': username, 'email': email, 'password': password, 'is_staff': staff}))}>register</Button>
+      <br/>
+      <Link to='/' ><Button variant='contained'>keep shopping</Button></Link>
       </Card>
       </Box>
   )

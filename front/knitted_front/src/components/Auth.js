@@ -23,7 +23,7 @@ const Authentication = () => {
           <input type="password" value={password} placeholder="password" onChange={(e) => setpassword(e.target.value)}></input>{" "}
           <Button size="small" variant="contained" onClick={() => dispatch(doSigninAsync({ username: username, password: password }))}>Login</Button>
           {' or '}
-          <Button><Link to='/register'>register</Link></Button>
+          <Link to='/register' sx={{ color: 'white' }}><Button size="small" variant="contained" >register</Button></Link>
           </div>
           }
           { token ?<div className="active-user">

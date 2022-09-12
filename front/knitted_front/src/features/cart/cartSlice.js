@@ -1,6 +1,7 @@
 import {  createSlice,createAsyncThunk } from '@reduxjs/toolkit';
 import { place_an_order } from './cartAPI';
 
+import { toast } from 'react-toastify'
 
 const initialState = {
     theCart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [],
@@ -25,14 +26,14 @@ export const cartSlice = createSlice({
 
             if (itemIndex >= 0) {
                 state.theCart[itemIndex].quantity += 1;
-                // toast.info(`1 more ${state.cart[itemIndex].name} added to cart`, {
-                //     position: 'bottom-left'
-                // })
+                toast.info(`1 more ${state.theCart[itemIndex].name} added to cart`, {
+                    position: 'bottom-left'
+                })
             } else {
                 state.theCart.push({ ...action.payload, quantity: 1 })
-                // toast.success(`${action.payload.name} added to cart`, {
-                //     position: 'bottom-left'
-                // })
+                toast.info(`${action.payload.name} added to cart`, {
+                    position: 'bottom-left'
+                })
             }
 
             localStorage.setItem('cart', JSON.stringify(state.theCart))
@@ -40,6 +41,9 @@ export const cartSlice = createSlice({
 
         clearCart: (state) => {
             state.theCart = []
+            toast.info(`cart cleared`, {
+                position: 'bottom-left'
+            })
 
             localStorage.setItem('cart', JSON.stringify(state.theCart))
         },
@@ -49,14 +53,14 @@ export const cartSlice = createSlice({
 
             if (state.theCart[itemIndex].quantity > 1) {
                 state.theCart[itemIndex].quantity -= 1;
-                // toast.info(`1 less ${state.cart[itemIndex].name} in cart`, {
-                //     position: 'bottom-left'
-                // })
+                toast.info(`1 less ${state.theCart[itemIndex].name} in cart`, {
+                    position: 'bottom-left'
+                })
             } else {
                 state.theCart = state.theCart.filter(item => item.id !== action.payload.id)
-                // toast.error(`${action.payload.name} removed from cart`, {
-                //     position: 'bottom-left'
-                // })
+                toast.info(`${action.payload.name} removed from cart`, {
+                    position: 'bottom-left'
+                })
             }
             localStorage.setItem('cart', JSON.stringify(state.theCart))
         },
@@ -82,7 +86,9 @@ export const cartSlice = createSlice({
             .addCase(placeAnOrderAsync.fulfilled, (state, action) => {
                 console.log(action.payload)
                 state.theCart = []
-                // toast
+                toast.success(`your order has been placed successfully`, {
+                    position: 'bottom-left'
+                })
             })
 
     },

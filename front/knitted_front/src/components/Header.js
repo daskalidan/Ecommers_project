@@ -31,7 +31,7 @@ const Header = () => {
                     </Box>
                 </Box>
                 <Box component='span' sx={{ alignSelf: 'end' }}>
-                    <Link to='/cart' underline="none">
+                    <Link to='/cart' >
                         <Button color='primary' variant="contained" endIcon={<ShoppingCartIcon />}>
                             cart ({myCartCount})
                         </Button>

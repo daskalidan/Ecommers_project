@@ -8,11 +8,15 @@ import MainSection from './components/MainSection';
 import Register from './components/Register';
 import Shop from './components/Shop';
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import { Box } from '@mui/material';
 
 function App() {
   return (
       <Box sx={{ backgroundImage: 'url(./icons8-clew-64.png)', backgroundColor: '#c5e1f9', backgroundAttachment: 'fixed', backgroundRepeat: 'repeat', backgroundSize: '50% 50%' }}>
+      <ToastContainer></ToastContainer>
       <Header />
       <Authentication />
       <Routes>

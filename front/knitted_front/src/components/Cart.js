@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, cartSelector, cartTotalPriceSelector, clearCart, placeAnOrderAsync, removeFromCart } from '../features/cart/cartSlice'
+import { addToCart, cartSelector, cartTotalPriceSelector, clearCart, removeFromCart } from '../features/cart/cartSlice'
+import { Link } from 'react-router-dom';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,7 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Button, ButtonGroup } from '@mui/material';
-import { authenticationSelector } from '../features/authentication/authenticationSlice';
+import ConfirmOrder from './ConfirmOrder';
 
 
 const Cart = () => {
@@ -18,17 +19,15 @@ const Cart = () => {
   const dispatch = useDispatch();
   const myTotalPrice = useSelector(cartTotalPriceSelector)
   
-  const auth = useSelector(authenticationSelector);
-  const token = auth.token;
-
-
   return (
     <Box sx= {{ padding: '5%', textAlign: 'center' }}>
       <TableContainer component={Paper} >
         <h2>My cart</h2>
         {myCart.length === 0 ?
-          (<p>cart is empty</p>) :
-          (
+          (<Box sx={{ padding: '5px' }}><p>cart is empty</p>
+          <Link to='/' ><Button variant='contained'>keep shopping</Button></Link>
+          </Box>
+          ) : (
             <Table sx={{ minWidth: 550 }} aria-label="simple table" >
               <TableHead>
                 <TableRow>
@@ -66,15 +65,16 @@ const Cart = () => {
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={2}>shipping</TableCell>
-                  <TableCell align="right">$20</TableCell>
+                  <TableCell align="right">$0</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={2}>Total price</TableCell>
-                  <TableCell align="right">${myTotalPrice + 20}</TableCell>
+                  <TableCell align="right">${myTotalPrice}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell colSpan={2}><Button variant='contained' onClick={() => dispatch(clearCart())}>clear cart</Button></TableCell>
-                  <TableCell align="right"><Button variant='contained' onClick={() => dispatch(placeAnOrderAsync({token,myCart,myTotalPrice}))}>checkout</Button></TableCell>
+                  <TableCell ><Button variant='contained' onClick={() => dispatch(clearCart())}>clear cart</Button></TableCell>
+                  <TableCell align="right"><Link to='/' ><Button variant='contained'>keep shopping</Button></Link></TableCell>
+                  <TableCell align="right"><ConfirmOrder/></TableCell>
                 </TableRow>
               </TableBody>
             </Table>)
