@@ -32,6 +32,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    # address = serializers.CharField(max_length=100, blank=False, null=False, default='unknown')
     email = serializers.EmailField(
             required=True,
             validators=[UniqueValidator(queryset=User.objects.all())]
@@ -39,17 +40,18 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        # fields = ('username', 'password', 'email', 'is_staff')
+        # fields = ('username', 'password', 'email', 'is_staff', 'address')
         fields = ('__all__')
 
     def create(self, validated_data):
+        print(validated_data)
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password'],
-            is_staff=validated_data['is_staff']
+            is_staff=validated_data['is_staff'],
         )
-
+        # user.userProfile.address = validated_data['address']
         user.save()
-
+        
         return user        

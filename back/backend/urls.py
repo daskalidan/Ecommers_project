@@ -26,7 +26,8 @@ urlpatterns = [
     path('token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('logout/', views.log_out),
     # register
-    path('register/', views.RegisterView.as_view(), name='auth_register'),
+    # path('register/', views.RegisterView.as_view(), name='auth_register'),
+     path('register/', views.register_my_user),
     # products
     path('allproducts/', views.all_products),
     path('createnewproduct/', views.Create_new_product.as_view()),

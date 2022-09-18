@@ -19,7 +19,19 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 class RegisterView(generics.CreateAPIView):
-    serializer_class = RegisterSerializer    
+    serializer_class = RegisterSerializer  
+
+@api_view(['POST'])
+def register_my_user(request):
+    print(request.data)
+    new_user_serializer = RegisterSerializer(data=request.data)
+    if new_user_serializer.is_valid():
+        new_user = new_user_serializer.create(new_user_serializer.validated_data)
+        new_user.userprofile.address = request.data['address']
+        new_user.save()
+        return Response(status=status.HTTP_201_CREATED)
+    return Response(new_user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
