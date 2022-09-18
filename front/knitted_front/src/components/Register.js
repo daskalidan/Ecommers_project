@@ -1,4 +1,4 @@
-import { Box, Button, Card } from '@mui/material';
+import { Box, Button, Checkbox, FormControlLabel, Paper, Stack, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { doSignupAsync } from '../features/authentication/authenticationSlice'
@@ -10,22 +10,25 @@ const Register = () => {
   const [username, setusername] = useState('')
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
-  const [staff, setstaff] = useState(false)
+  const [is_staff, setis_staff] = useState(false)
+  const [address, setaddress] = useState('')
 
 
   return (
     <Box >
-      <Card sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column', padding: '10%', margin: '10%' }}>
-      <h2>register</h2><br/>
-      <input type='text' value={username} placeholder='username' onChange={(e) => setusername(e.target.value)}></input>{' '}
-      <input type='text' value={email} placeholder='email' onChange={(e) => setemail(e.target.value)}></input>{' '}
-      <input type='password' value={password} placeholder='password' onChange={(e) => setpassword(e.target.value)}></input>{' '}
-      <span><label>staff:</label><input type='checkbox' value={staff} onChange={(e) => setstaff(e.target.value)}></input></span>
-      <Button variant='contained' onClick={() => dispatch(doSignupAsync({ 'username': username, 'email': email, 'password': password, 'is_staff': staff}))}>register</Button>
-      <br/>
-      <Link to='/' ><Button variant='contained'>keep shopping</Button></Link>
-      </Card>
-      </Box>
+      <Paper elevation={3} sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column', padding: '5%', margin: '10%' }}>
+        <Stack spacing={2}>
+          <Typography variant='h4'>register</Typography>
+            <TextField value={username} label='user name' onChange={(e) => setusername(e.target.value)} required size="small" />
+            <TextField value={email} label='email' onChange={(e) => setemail(e.target.value)} required size="small" />
+            <TextField value={address} label='address' onChange={(e) => setaddress(e.target.value)} required size="small" />
+            <TextField type='password' value={password} label='password' onChange={(e) => setpassword(e.target.value)} required size="small" />
+            <FormControlLabel control={<Checkbox onChange={(e) => setis_staff(e.target.checked)} />} label='staff' />
+            <Button variant='contained' onClick={() => dispatch(doSignupAsync({ username, email, password, is_staff, address }))}>register</Button>
+            <Link to='/' ><Button variant='contained'>keep shopping</Button></Link>
+            </Stack>
+      </Paper>
+    </Box>
   )
 }
 

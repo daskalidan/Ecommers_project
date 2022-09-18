@@ -9,8 +9,11 @@ export function signin(action) {
 }
 
 export function signup(action) {
+    console.log(action)
+    // const data = action
+    // console.log(data)
     return new Promise((resolve) =>
-        axios.post(`${URL}register/`, { username: action.username,email: action.email, password: action.password, is_staff:action.is_staff })
+        axios.post(`${URL}register/`, action)
         .then((res) => resolve({ data: res.data }))
     );
 }
