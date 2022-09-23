@@ -59,3 +59,23 @@ export function delete_product(action) {
         ).then((res) => resolve({ data: res.data }))
     );
 }
+
+export function edit_product(action) {
+    console.log(action)
+    const data = {
+        'name': action.name,
+        'category': action.category,
+        'price': action.price,
+        'description': action.description,
+        'image': action.imag,
+        'thumbnail': null
+    }
+
+    return new Promise((resolve) =>
+        axios.put(`${URL}editproduct/${action.id}`,
+         data,
+         { headers: { 'Authorization': `Bearer ${action.token}`, 'Content-Type': 'multipart/form-data'} },
+         ).then((res) => resolve({ data: res.data }))
+    );
+
+}

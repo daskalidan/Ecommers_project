@@ -2,7 +2,8 @@ import { Stack, Button, Paper, Box, Typography, TextField, Select, MenuItem, Inp
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectStaff, selectToken } from '../features/authentication/authenticationSlice';
-import { addNewProductAsync, categoriesSelector } from '../features/shop/productsSlice';
+import { addNewProductAsync } from '../features/shop/productsSlice';
+import { categoriesSelector } from '../features/shop/categorySlice';
 
 
 const AddNewProduct = () => {

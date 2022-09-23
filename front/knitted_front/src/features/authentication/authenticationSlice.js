@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { log_out, signin, signup } from './authenticationAPI';
 import jwt_decode from "jwt-decode";
 
+import { toast } from 'react-toastify'
 
 const initialState = {
     userName: "guest",
@@ -12,17 +13,15 @@ const initialState = {
 
 export const doSigninAsync = createAsyncThunk(
     'authentication/signin',
-    async (action) => {
-        const response = await signin(action);
-        return response.data;
+   (action) => {
+    return signin(action);
     }
 );
 
 export const doSignupAsync = createAsyncThunk(
     'authentication/signup',
-    async (action) => {
-        const response = await signup(action);
-        return response.data;
+    (action) => {
+        return signup(action);
     }
 );
 
@@ -50,17 +49,36 @@ export const authenticationSlice = createSlice({
         builder
             .addCase(doSigninAsync.fulfilled, (state, action) => {
                 console.log(jwt_decode(action.payload.access))
-                if (action.payload.access) {
-                    state.token = action.payload.access
-                    state.staff = jwt_decode(action.payload.access).is_staff;
-                    state.userName = jwt_decode(action.payload.access).username
-                    state.email = jwt_decode(action.payload.access).email
-                }
+                state.token = action.payload.access
+                state.staff = jwt_decode(action.payload.access).is_staff;
+                state.userName = jwt_decode(action.payload.access).username
+                state.email = jwt_decode(action.payload.access).email
+                toast.success(`wellcome ${jwt_decode(action.payload.access).username} `, {
+                    position: 'bottom-left'
+                })
             })
-            .addCase(doSignupAsync.fulfilled, (action) => {
+            .addCase(doSigninAsync.rejected, (action) => {
                 console.log(action)
+                toast.error('some of the details are incorrect', {
+                    position: 'bottom-left'
+                })
+            })
+
+            .addCase(doSignupAsync.fulfilled, (action) => {
+                console.log(action.payload)
+                toast.success(` registered successfully `, {
+                    position: 'bottom-left'
+                })
 
             })
+            .addCase(doSignupAsync.rejected, (action) => {
+                console.log(action)
+                toast.error('something went wrong', {
+                    position: 'bottom-left'
+                })
+            })
+
+
             .addCase(doSignoutAsync.fulfilled, (state, action) => {
                 console.log(action)
                 state.token = ""

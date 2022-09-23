@@ -1,8 +1,8 @@
 import { Box, Button, Paper, Stack } from '@mui/material';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { categoriesSelector, categorySelector, chooseCategory } from '../features/shop/productsSlice';
-
+import { categorySelector, chooseCategory } from '../features/shop/productsSlice';
+import { categoriesSelector } from '../features/shop/categorySlice';
 
 
 const Categories = () => {

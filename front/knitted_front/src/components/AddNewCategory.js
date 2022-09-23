@@ -2,7 +2,7 @@ import { Box, Button, Paper, Stack, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectStaff, selectToken } from '../features/authentication/authenticationSlice';
-import { addNewCategoryAsync } from '../features/shop/productsSlice';
+import { addNewCategoryAsync } from '../features/shop/categorySlice';
 
 
 const AddNewCategory = () => {
