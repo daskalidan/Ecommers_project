@@ -15,7 +15,7 @@ import { Box } from '@mui/material';
 
 function App() {
   return (
-      <Box sx={{ backgroundImage: 'url(./icons8-clew-64.png)', backgroundColor: '#c5e1f9', backgroundAttachment: 'fixed', backgroundRepeat: 'repeat', backgroundSize: '50% 50%' }}>
+      <Box sx={{ minHeight: '100vh', backgroundImage: 'url(./icons8-clew-64.png)', backgroundColor: '#c5e1f9', backgroundAttachment: 'fixed', backgroundRepeat: 'repeat', backgroundSize: '50% 50%' }}>
       <ToastContainer></ToastContainer>
       <Header />
       <Authentication />

@@ -23,6 +23,10 @@ const Register = () => {
             <TextField value={email} label='email' onChange={(e) => setemail(e.target.value)} required size="small" />
             <TextField value={address} label='address' onChange={(e) => setaddress(e.target.value)} required size="small" />
             <TextField type='password' value={password} label='password' onChange={(e) => setpassword(e.target.value)} required size="small" />
+            Your password can’t be too similar to your other personal information.
+            Your password must contain at least 8 characters.
+            Your password can’t be a commonly used password.
+            Your password can’t be entirely numeric.
             <FormControlLabel control={<Checkbox onChange={(e) => setis_staff(e.target.checked)} />} label='staff' />
             <Button variant='contained' onClick={() => dispatch(doSignupAsync({ username, email, password, is_staff, address }))}>register</Button>
             <Link to='/' ><Button variant='contained'>keep shopping</Button></Link>

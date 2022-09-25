@@ -60,6 +60,17 @@ export function delete_product(action) {
     );
 }
 
+export function delete_category(action) {
+    return new Promise((resolve) =>
+        axios.delete(`${URL}deletecategory/`,
+            {
+                headers: { 'Authorization': `Bearer ${action.token}` },
+                data: action.item
+            }
+        ).then((res) => resolve({ data: res.data }))
+    );
+}
+
 export function edit_product(action) {
     console.log(action)
     const data = {

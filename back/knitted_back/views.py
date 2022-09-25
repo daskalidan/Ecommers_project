@@ -2,6 +2,7 @@ from decimal import Decimal
 from rest_framework.response import Response
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.generics import UpdateAPIView
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated
@@ -11,7 +12,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 
 from django.contrib.auth import logout
 from .models import Category, Order, OrderItem, Product
-from .serializers import CategorySerializer, MyTokenObtainPairSerializer, ProductSerializer, RegisterSerializer
+from .serializers import CategorySerializer, EditProductSerializer, MyTokenObtainPairSerializer, ProductSerializer, RegisterSerializer
 
 # Create your views here.
 
@@ -91,6 +92,29 @@ class Create_new_product(APIView):
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+class edit_product(UpdateAPIView):
+    queryset = Product.objects.all()
+    permission_classes = [IsAuthenticated]
+    parser_class = (MultiPartParser, FormParser)
+    lookup_field = 'id'
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_staff == True:
+            serializer = EditProductSerializer(data=request.data)
+            if serializer.is_valid():  
+                product = serializer.save()
+                products = Product.objects.all()
+                all_serializer = ProductSerializer(products, many=True)
+                return Response(all_serializer.data, status=status.HTTP_200_OK)
+            else:
+                print('error', serializer.errors)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                    
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+
+
+
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def delete_product(request):
@@ -106,6 +130,23 @@ def delete_product(request):
         return Response(serializer.data)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)    
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_category(request):
+    print(request.data)
+    try:
+        category = Category.objects.get(pk=request.data['id'])
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.user.is_staff == True:
+        category.delete()
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)         
 
 
 @api_view(['POST'])
