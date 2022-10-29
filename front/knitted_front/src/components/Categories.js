@@ -21,13 +21,13 @@ const Categories = () => {
       <Stack spacing={1} sx={{ textAlign: 'center' }}>
         <Paper>
           <h3>categories</h3><hr />
-          <h4>active cat</h4>
+          <h4>active category</h4>
           <h5>{active_cat.cat_name ? active_cat.cat_name : active_cat}</h5><hr />
-          <Button sx={{ width: '80%' }} onClick={() => dispatch(chooseCategory('all'))}>all (?)</Button>
+          <Button sx={{ width: '80%' }} onClick={() => dispatch(chooseCategory('all'))}>all</Button>
           {categoriesAr.map((cat) => (
             <Box key={cat.id}>
               {staff && <DeleteCategory item={cat} />}
-              <Button sx={{ width: '80%' }} onClick={() => dispatch(chooseCategory(cat))}>{cat.cat_name} (?)</Button>
+              <Button sx={{ width: '80%' }} onClick={() => dispatch(chooseCategory(cat))}>{cat.cat_name}</Button>
             </Box>
           ))}
         </Paper>

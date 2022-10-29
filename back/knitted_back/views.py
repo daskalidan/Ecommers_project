@@ -12,7 +12,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 
 from django.contrib.auth import logout
 from .models import Category, Order, OrderItem, Product
-from .serializers import CategorySerializer, EditProductSerializer, MyTokenObtainPairSerializer, ProductSerializer, RegisterSerializer
+from .serializers import CategorySerializer, MyTokenObtainPairSerializer, ProductSerializer, RegisterSerializer
 
 # Create your views here.
 
@@ -95,24 +95,23 @@ class Create_new_product(APIView):
 class edit_product(UpdateAPIView):
     queryset = Product.objects.all()
     permission_classes = [IsAuthenticated]
-    parser_class = (MultiPartParser, FormParser)
+    serializer_class = ProductSerializer
     lookup_field = 'id'
 
     def update(self, request, *args, **kwargs):
         if request.user.is_staff == True:
-            serializer = EditProductSerializer(data=request.data)
-            if serializer.is_valid():  
-                product = serializer.save()
+            instance = self.get_object()
+            serializer = self.get_serializer(instance, data=request.data)
+            if serializer.is_valid():
+                self.perform_update(serializer)
                 products = Product.objects.all()
                 all_serializer = ProductSerializer(products, many=True)
                 return Response(all_serializer.data, status=status.HTTP_200_OK)
             else:
                 print('error', serializer.errors)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                    
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                   
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-
-
 
 
 @api_view(['DELETE'])

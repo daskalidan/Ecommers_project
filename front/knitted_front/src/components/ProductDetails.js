@@ -22,7 +22,7 @@ const ProductDetails = (props) => {
     const categoryOptions = useSelector(categoriesSelector)
 
     const [open, setOpen] = useState(false)
-    const [prodimg, setprodimg] = useState(props.item.get_thumbnail)
+    // const [prodimg, setprodimg] = useState(props.item.get_thumbnail)
     const [prodname, setprodname] = useState(props.item.name)
     const [prodcat, setprodcat] = useState(props.item.category)
     const [proddesc, setproddesc] = useState(props.item.description)
@@ -48,10 +48,10 @@ const ProductDetails = (props) => {
             'category': prodcat,
             'price': prodprice,
             'description': proddesc,
-            'imag': prodimg,
+            // 'imag': prodimg,
             'token': token,
             'id': props.item.id,
-            'thumbnail': null
+            // 'thumbnail': null
           }))
     };
 
@@ -69,7 +69,7 @@ const ProductDetails = (props) => {
                     {"Product Details"}
                 </DialogTitle>
                 <DialogContent >
-                    <img alt={prodname} src={prodimg} width="200" height="200" />
+                    <img alt={prodname} src={props.item.get_thumbnail} width="200" height="200" />
                     {!staff && <Card sx={{ maxWidth: 200 }}>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">{prodname}</Typography>
@@ -80,7 +80,7 @@ const ProductDetails = (props) => {
                         </CardContent>
                     </Card>}
                     {staff && <Box sx={{ width: '300px' }}>
-                    <input type='file' placeholder='imag' onChange={(e) => setprodimg(e.target.files[0])}></input>
+                    {/* <input type='file' placeholder='imag' onChange={(e) => setprodimg(e.target.files[0])}></input> */}
                         <TextField sx={{ marginTop: '10px' }} value={prodname} label='product name' onChange={(e) => setprodname(e.target.value)} size="small" />
                         <Typography>product id: {props.item.id}</Typography>
                         <FormControl>

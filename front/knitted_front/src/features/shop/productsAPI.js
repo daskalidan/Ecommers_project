@@ -78,14 +78,14 @@ export function edit_product(action) {
         'category': action.category,
         'price': action.price,
         'description': action.description,
-        'image': action.imag,
-        'thumbnail': null
+        // 'image': action.imag,
+        // 'thumbnail': null
     }
 
     return new Promise((resolve) =>
         axios.put(`${URL}editproduct/${action.id}`,
          data,
-         { headers: { 'Authorization': `Bearer ${action.token}`, 'Content-Type': 'multipart/form-data'} },
+         { headers: { 'Authorization': `Bearer ${action.token}` } },
          ).then((res) => resolve({ data: res.data }))
     );
 

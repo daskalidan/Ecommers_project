@@ -76,6 +76,13 @@ export const productsSlice = createSlice({
                 }
             })
 
+            .addCase(editProductAsync.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.products = action.payload;
+                state.category = 'all'
+                state.productsInCategory = action.payload
+            })
+
 
     },
 });
