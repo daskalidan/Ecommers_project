@@ -7,7 +7,36 @@ the main theam for this project is an ecommerce shop selling knitted dolls, hand
 server side uses python django framework with rest api interface.
 clinte side is react js.
 
-## app's components(front):
+##
+to run this project(windows):
+(you need to have python installed) 
+activate a server side on your local machine:
+open shell in a folder made for this project then run the comands below line by line
+
+git clone https://github.com/daskalidan/Ecommers_project.git
+cd .\Ecommers_project\back\
+py -m venv venv
+.\venv\Scripts\activate
+pip install -r .\requirements.txt
+py .\manage.py runserver
+
+when you have a running server...
+
+open browser on this link:
+https://ecom-front.web.app/
+
+or serve front side on your local machine:
+(you need to have node.js installed)
+open shell in a folder made for this project (same folder from the server side) then run the comands below line by line
+
+cd .\Ecommers_project\front\knitted_front\
+npm i
+npm start
+
+if browser does not open automaticaly open it on http://localhost:3000/
+
+
+<!-- ## app's components(front):
 header: always shown on page top woth shop name and logo in the middle.
 footer: at the bottom of each page with copiryte and contact us link
 ### main page:
@@ -37,7 +66,7 @@ header, footer same as main page - main section: all centerd, title shop name, s
 ### inventory model
 ### user model
 ### cart model
-### purches model
+### purches model -->
 
 
 <!-- # Getting Started with Create React App and Redux
