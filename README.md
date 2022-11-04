@@ -4,8 +4,8 @@ a full stack Ecommerce project for the "python fullstack developer course" at th
 ## general info  
 the main theam for this project is an ecommerce shop selling knitted dolls, hand made.  
 
-server side uses python django framework with rest api interface.  
-clinte side is react js.  
+server side uses python django framework with rest-api interface.  
+clinte side is react js with redux.  
   
 ##  
 to run this project(windows):  
@@ -27,6 +27,9 @@ when you have a running server...
   
 open browser on this link:  
 https://ecom-front.web.app/  
+
+super user: theboss  
+password: abc123  
   
 or serve front side on your local machine:  
 (you need to have node.js installed)  
