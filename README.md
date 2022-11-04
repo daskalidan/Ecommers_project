@@ -15,8 +15,11 @@ open shell in a folder made for this project then run the comands below line by 
   
 git clone https://github.com/daskalidan/Ecommers_project.git  
 cd .\Ecommers_project\back\  
+
+pip install virtualenv
 py -m venv venv  
 .\venv\Scripts\activate  
+
 pip install -r .\requirements.txt  
 py .\manage.py runserver  
   
