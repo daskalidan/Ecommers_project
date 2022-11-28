@@ -9,29 +9,31 @@ clinte side is react js with redux.
   
 ##  
 to run this project(windows):  
+  
+open browser on this link:  
+https://ecom-front.web.app/  
+  
+to run localy:  
 (you need to have python installed)   
 activate a server side on your local machine:  
 open shell in a folder made for this project then run the comands below line by line  
   
 git clone https://github.com/daskalidan/Ecommers_project.git  
 cd .\Ecommers_project\back\  
-
+  
 pip install virtualenv  
 py -m venv venv  
 .\venv\Scripts\activate  
-
+  
 pip install -r .\requirements.txt  
 py .\manage.py runserver  
   
 when you have a running server...  
   
-open browser on this link:  
-https://ecom-front.web.app/  
-
 super user: theboss  
 password: abc123  
   
-or serve front side on your local machine:  
+serve front side on your local machine:  
 (you need to have node.js installed)  
 open shell in a folder made for this project (same folder from the server side) then run the comands below line by line  
   
